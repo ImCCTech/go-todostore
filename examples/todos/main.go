@@ -21,8 +21,8 @@ func main() {
 
 	// List all Todos
 	todoL, _ := client.Todos.List(sdk.TodoListOptions{})
-	spew.Printf("【todoList】: %v", todoL)
-	spew.Printf("【todoList】: %v", todoL)
+	spew.Printf("【todoList】: %v\n", todoL)
+	// spew.Printf("【todoList length】: %v\n", len(todoL))
 
 	// Create a new todo
 	options := sdk.TodoCreateOptions{
@@ -52,5 +52,5 @@ func main() {
 
 	// List all Todos
 	todoL, _ = client.Todos.List(sdk.TodoListOptions{})
-	spew.Printf("todoList: %v", todoL)
+	spew.Printf("todoList: %v\n", todoL)
 }
