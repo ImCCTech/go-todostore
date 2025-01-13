@@ -25,7 +25,7 @@ const (
 	// DefaultAddress of Todostore server
 	DefaultAddress = "http://localhost:8000"
 	// DefaultBasePath on which the API is served.
-	DefaultBasePath = "/api/todos"
+	DefaultBasePath = "/api/"
 )
 
 var (
