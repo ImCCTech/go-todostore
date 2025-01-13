@@ -17,6 +17,11 @@ func validInteger(v *int) bool {
 	return v != nil && *v > 0
 }
 
+// validIntegerID
+func validIntegerID(v *int) bool {
+	return v != nil && *v > 0
+}
+
 // validStringID checks if the given string pointer is non-nil and
 // contains a typical string identifier.
 func validStringID(v *string) bool {

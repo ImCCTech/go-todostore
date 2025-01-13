@@ -36,7 +36,8 @@ func main() {
 	// debug output
 	spew.Printf("【debug todo id】: %v \n", todo.ID)
 	// Update todo
-	todo, _ = client.Todos.Update(todo.ID, sdk.TodoUpdateOptions{Title: "Golang Todo modified"})
+	todo, _ = client.Todos.Update(todo.ID, sdk.TodoUpdateOptions{Title: "Golang Todo modified", Memo: "haha"})
+	spew.Printf("【updated_todo】: %v \n", todo)
 
 	// Read todo by ID
 	todo, _ = client.Todos.Read(todo.ID)
@@ -48,7 +49,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// List all Todos
+	// // List all Todos
 	todoL, _ = client.Todos.List(sdk.TodoListOptions{})
 	spew.Printf("todoList: %v\n", todoL)
 }

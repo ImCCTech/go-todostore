@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -22,13 +23,13 @@ type Todos interface {
 	Create(options TodoCreateOptions) (*Todo, error)
 
 	// Read an todo by its ID.
-	Read(todoID string) (*Todo, error)
+	Read(todoID int) (*Todo, error)
 
 	// Update an todo by its ID.
-	Update(todoID string, options TodoUpdateOptions) (*Todo, error)
+	Update(todoID int, options TodoUpdateOptions) (*Todo, error)
 
 	// Delete an todo by its ID.
-	Delete(todoID string) error
+	Delete(todoID int) error
 }
 
 // todos implements Todos.
@@ -38,12 +39,12 @@ type todos struct {
 
 // TodoList represents a list of todos.
 type TodoList struct {
-	Items []*Todo `json:"items"`
+	Items []Todo `json:"items"`
 }
 
 // Todo represents a Todostore todo.
 type Todo struct {
-	ID        string    `json:"id"`
+	ID        int       `json:"id"`
 	Title     string    `json:"title"`
 	Memo      string    `json:"memo"`
 	Created   time.Time `json:"created"`
@@ -111,12 +112,12 @@ func (s *todos) Create(options TodoCreateOptions) (*Todo, error) {
 }
 
 // Read an todo by id.
-func (s *todos) Read(todoID string) (*Todo, error) {
-	if !validStringID(&todoID) {
+func (s *todos) Read(todoID int) (*Todo, error) {
+	if !validIntegerID(&todoID) {
 		return nil, errors.New("invalid value for todoID")
 	}
 
-	u := fmt.Sprintf("todos/%s", url.QueryEscape(todoID))
+	u := fmt.Sprintf("todos/%s", url.QueryEscape(strconv.Itoa(todoID)))
 	req, err := s.client.newRequest("GET", u, nil)
 	if err != nil {
 		return nil, err
@@ -138,13 +139,14 @@ type TodoUpdateOptions struct {
 }
 
 // Update attributes of an existing todo.
-func (s *todos) Update(todoID string, options TodoUpdateOptions) (*Todo, error) {
-	if !validStringID(&todoID) {
+func (s *todos) Update(todoID int, options TodoUpdateOptions) (*Todo, error) {
+	if !validIntegerID(&todoID) {
 		return nil, errors.New("invalid value for todoID")
 	}
 
-	u := fmt.Sprintf("todos/%s", url.QueryEscape(todoID))
+	u := fmt.Sprintf("todos/%s", url.QueryEscape(strconv.Itoa(todoID)))
 	req, err := s.client.newRequest("PATCH", u, &options)
+	// req, err := s.client.newRequest("PUT", u, &options)
 	if err != nil {
 		return nil, err
 	}
@@ -159,12 +161,12 @@ func (s *todos) Update(todoID string, options TodoUpdateOptions) (*Todo, error) 
 }
 
 // Delete an tood by its ID.
-func (s *todos) Delete(todoID string) error {
-	if !validStringID(&todoID) {
+func (s *todos) Delete(todoID int) error {
+	if !validIntegerID(&todoID) {
 		return errors.New("invalid value for todoID")
 	}
 
-	u := fmt.Sprintf("todos/%s", url.QueryEscape(todoID))
+	u := fmt.Sprintf("todos/%s", url.QueryEscape(strconv.Itoa(todoID)))
 	req, err := s.client.newRequest("DELETE", u, nil)
 	if err != nil {
 		return err
