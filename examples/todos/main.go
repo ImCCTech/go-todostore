@@ -10,7 +10,7 @@ import (
 
 func main() {
 	config := &sdk.Config{
-		//Address: "insert-your-todostore-address-here",
+		// Address: "insert-your-todostore-address-here",
 		Address: "http://localhost:8000",
 	}
 
@@ -21,9 +21,9 @@ func main() {
 
 	// List all Todos
 	todoL, _ := client.Todos.List(sdk.TodoListOptions{})
-	spew.Printf("petList: %v", todoL)
+	spew.Printf("【todoList】: %v", todoL)
 
-	// Create a new pet
+	// Create a new todo
 	options := sdk.TodoCreateOptions{
 		Title: "Golang Todo",
 		Memo:  "Write a Golang client for TodoStore",
@@ -34,12 +34,14 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// debug output
+	spew.Printf("debug todo: %v \n", todo.ID)
 	// Update todo
 	todo, _ = client.Todos.Update(todo.ID, sdk.TodoUpdateOptions{Title: "Golang Todo modified"})
 
 	// Read todo by ID
 	todo, _ = client.Todos.Read(todo.ID)
-	fmt.Printf("pet: %v \n", todo)
+	fmt.Printf("todo: %v \n", todo)
 
 	// Delete a todo
 	err = client.Todos.Delete(todo.ID)
