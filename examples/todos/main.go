@@ -22,6 +22,7 @@ func main() {
 	// List all Todos
 	todoL, _ := client.Todos.List(sdk.TodoListOptions{})
 	spew.Printf("【todoList】: %v", todoL)
+	spew.Printf("【todoList】: %v", todoL)
 
 	// Create a new todo
 	options := sdk.TodoCreateOptions{
@@ -35,7 +36,7 @@ func main() {
 	}
 
 	// debug output
-	spew.Printf("debug todo: %v \n", todo.ID)
+	spew.Printf("debug todo: %v \n", todo)
 	// Update todo
 	todo, _ = client.Todos.Update(todo.ID, sdk.TodoUpdateOptions{Title: "Golang Todo modified"})
 
