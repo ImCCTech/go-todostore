@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	sdk "github.com/TyunTech/go-todostore"
@@ -21,8 +20,7 @@ func main() {
 
 	// List all Todos
 	todoL, _ := client.Todos.List(sdk.TodoListOptions{})
-	spew.Printf("【todoList】: %v\n", todoL)
-	// spew.Printf("【todoList length】: %v\n", len(todoL))
+	spew.Printf("【todoList】: %v\n", todoL.Items)
 
 	// Create a new todo
 	options := sdk.TodoCreateOptions{
@@ -42,7 +40,7 @@ func main() {
 
 	// Read todo by ID
 	todo, _ = client.Todos.Read(todo.ID)
-	fmt.Printf("todo: %v \n", todo)
+	spew.Printf("【todo】: %v \n", todo)
 
 	// Delete a todo
 	err = client.Todos.Delete(todo.ID)
