@@ -3,7 +3,7 @@ module github.com/ImCCTech/go-todostore
 go 1.22.3
 
 require (
-	github.com/TyunTech/go-todostore v0.0.0-20250113071652-b5e3ced526a5
+	github.com/ImCCTech/go-todostore v0.0.0-20250113071652-b5e3ced526a5
 	github.com/davecgh/go-spew v1.1.1
 	github.com/google/go-querystring v1.1.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
